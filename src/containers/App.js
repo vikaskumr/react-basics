@@ -1,7 +1,8 @@
 import logo from '../../src/logo.svg';
 import './App.css';
 import React, { Component } from 'react';
-import Person from '../components/Persons/Person';
+import Persons from '../components/Persons/Persons';
+import Cockpit from '../components/Cockpit/Cockpit';
 
 //class based components
 class App extends Component {
@@ -17,7 +18,6 @@ class App extends Component {
 
   switchNameHander = (newName) => {
 
-    // console.log('Was clicked!');
     /*don't directly mutate state like this 
     this.state.persons[0] = "Maxmilian";*/
 
@@ -26,8 +26,8 @@ class App extends Component {
     this.setState(
       {
         persons: [
-          { name: newName, age: 28 },
-          { name: "Manuaaa", age: 26 }
+          { name: newName, age: 28, key: 1 },
+          { name: "Manuaaa", age: 26, key: 2 }
         ]
       }
     );
@@ -51,18 +51,13 @@ class App extends Component {
   render() {
     return (
       <div className="App" >
-        <h1> Hi I am a React app</h1>
-        <p>This is really working!</p>
-        <button onClick={this.switchNameHander.bind(this, "Vikas!!")}>Switch Name</button>
-        <Person name={this.state.persons[0].name} age={this.state.persons[0].age} />
-        <Person
-          name={this.state.persons[1].name}
-          age={this.state.persons[1].age}
-          click={this.switchNameHander.bind(this, "Sumit")}
-          changed={this.nameChangedHander} >
-          My Hobies:  Racing
-        </Person>
-
+        <Cockpit
+          nameHander={this.switchNameHander.bind(this, "Vikas!!")}>
+        </Cockpit>
+        <Persons
+          persons={this.state.persons}
+          changed={this.nameChangedHander}>
+        </Persons>
       </div>
     );
 
