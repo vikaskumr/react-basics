@@ -1,7 +1,7 @@
-import logo from './logo.svg';
+import logo from '../../src/logo.svg';
 import './App.css';
 import React, { Component } from 'react';
-import Person from './Person/Person';
+import Person from '../components/Persons/Person';
 
 //class based components
 class App extends Component {
