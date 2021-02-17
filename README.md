@@ -1,4 +1,4 @@
-# Simple Example of React Covering all the basics
+Simple Example of React Covering all the basics
 
 # Getting Started with Create React App
 
