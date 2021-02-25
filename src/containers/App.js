@@ -1,11 +1,21 @@
 import logo from '../../src/logo.svg';
-import './App.css';
+import classes from './App.css';
 import React, { Component } from 'react';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
+import WithClass from '../hoc/WithClass';
+import Aux from '../hoc/Aux'
+
 
 //class based components
 class App extends Component {
+
+
+  constructor(props) {
+    super(props);
+    console.log('constructed called');
+
+  }
 
   //classes are state based components
   //state can't be changed and if it changed then it will rerender the component
@@ -15,6 +25,20 @@ class App extends Component {
       { name: "Manu", age: 29 }
     ]
   };
+
+
+  static getDerivedStateFromProps(props, state) {
+    console.log('[App.js] getDerivedState called');
+    return state;
+  }
+
+  componentDidMount() {
+    console.log('[App.js ] component did mount called');
+  }
+
+  componentWillUnmount() {
+    console.log('run right before component is unmounted');
+  }
 
   switchNameHander = (newName) => {
 
@@ -49,8 +73,9 @@ class App extends Component {
 
 
   render() {
+    console.log('[App.js render  called]');
     return (
-      <div className="App" >
+      <Aux>
         <Cockpit
           nameHander={this.switchNameHander.bind(this, "Vikas!!")}>
         </Cockpit>
@@ -58,11 +83,11 @@ class App extends Component {
           persons={this.state.persons}
           changed={this.nameChangedHander}>
         </Persons>
-      </div>
+      </Aux>
     );
 
     // return React.createElement('div', { className: 'App' }, React.createElement('h1', null, 'Does this work now?'));
   }
 }
 
-export default App;
+export default WithClass(App, classes.App)
